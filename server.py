@@ -11,7 +11,7 @@ W tym pliku należy uzupełnić pętlę while (linijka 153)
 Należy również zmodyfikować adres IP w zmiennej host na swój z sieci lokalnej
 '''
 
-HOST = "192.168.0.1"
+HOST = "10.20.30.15"
 PORT = 8999
 
 s = socket(AF_INET, SOCK_STREAM)
