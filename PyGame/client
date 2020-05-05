@@ -1,0 +1,8 @@
+from network import Network
+
+network = Network()
+network.connect()
+
+while True:
+    message = input()
+    network.send(message)
