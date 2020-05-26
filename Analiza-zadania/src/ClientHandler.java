@@ -13,21 +13,21 @@ class ClientHandler {
         try {
             //Read data from client
             //TODO 2.2 Zdobądź dane od klienta i zapisz je do zmiennej input
-
+            input = in.readUTF();
             switch (input) {
                 //Handle client requests
                 //TODO 2.2 Obsłuż żądania klienta. Dla ułatwienia pozostawiono tyle pustych linii, ile powinien zajmować kod
                 case "infos":
-
-
-
-
+                    String phrase = in.readUTF();
+                    Info info = new Info();
+                    output = info.information(phrase);
+                    out.writeUTF(output);
                     break;
                 case "memes":
-
-
-
-
+                    String amount = in.readUTF();
+                    Memes memes = new Memes();
+                    output = memes.memes(Integer.parseInt(amount));
+                    out.writeUTF(output);
                     break;
                 case "subscription":
                     String newSubscriber = in.readUTF();
