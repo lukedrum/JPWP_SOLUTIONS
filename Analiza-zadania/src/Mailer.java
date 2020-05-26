@@ -25,7 +25,11 @@ public class Mailer {
             //Create email based on session, created earlier
             MimeMessage message = new MimeMessage(session);
             //Set sender (email as InternetAddress object required)
-            //TODO 3.1  Przygotuj wiadomość message do wysłania. Dodaj odpowiednie pola
+            //DONE 3.1  Przygotuj wiadomość message do wysłania. Dodaj odpowiednie pola
+            message.setFrom(from);
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject(subject);
+            message.setText(text);
             //Use Transport class to send email
             Transport.send(message);
         } catch (MessagingException e) {
