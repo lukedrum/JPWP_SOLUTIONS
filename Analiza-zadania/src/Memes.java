@@ -25,15 +25,23 @@ public class Memes {
                 Document document = connect.get();
                 //Find all images on site
                 //TODO 1.2 znajdź wszystkie obrazki w kodzie strony. Zapisz je do zmiennej allIMG
+                Elements allImg = document.getElementsByTag("img");
                 //Search through all images found on site
                 if (url.equals("https://kwejk.pl")) {
                     //TODO 1.2 przeanalizuj kod, zwracany jako poszczególne elementy, a następnie wyświetl tylko amount
                     //TODO 1.2 pierwszych memów z serwisu kwejk.pl
+                    for (Element img : allImg.subList(0,amount)) {
+                        site.append("<div class = 'container'><img src='").append(img.attr("src"));
+                        site.append("'></div>");
+                    }
 
                 } else if (url.equals("https://besty.pl")) {
                     //TODO 1.2 Serwis besty.pl wyrzuca niepotrzebne nam śmieci jako 2 pierwsze obrazki.
                     //TODO 1.2 Za pomocą metody sublist() odzyskaj amount pierwszych memów
-
+                    for (Element img : allImg.subList(2,amount)) {
+                        site.append("<div class = 'container'><img src='").append(img.attr("src"));
+                        site.append("'></div>");
+                    }
                 } else {
                     for (Element img : allImg.subList(0, Math.min(amount, allImg.size()))) {
                         //Handle relative addresses
