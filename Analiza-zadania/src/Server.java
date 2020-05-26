@@ -35,14 +35,21 @@ public class Server {
 
     }
 
-    public void sendMail(){
+    public void sendMail() {
         //TODO 3.2 Napisz funkcję, wysyłającą maile do wszystkich sybskrybentów
+        if (!coronavirusSubscribers.isEmpty()) {
+            Mailer mailer = new Mailer();
+            site = new Info().newsToNewsletter();
+            for (String subscriber : coronavirusSubscribers) {
+                mailer.sendEmail(email, emailPassword, subscriber, "Czesc", site);
+            }
+        }
     }
 
     Server() throws IOException {
         //Add your email to check correctness of your code
-        /*coronavirusSubscribers.add("");
-        this.sendMail();*/
+        coronavirusSubscribers.add("piotrek9880@gmail.com");
+        this.sendMail();
 
         //Start timer to send email every 8h
         timer.start();
@@ -58,19 +65,21 @@ public class Server {
             try {
                 //Accept incoming requests
                 //TODO 2.1 Akcpetuj połączenia, przychodzące od klientów
+                socket = serverSocket.accept();
                 //Create data streams to communicate
                 //TODO 2.1 Utórz przychodzący i wychodzący strumień danych, zapisz je jako in oraz out
+                DataInputStream in = new DataInputStream(socket.getInputStream());
+                DataOutputStream out = new DataOutputStream(socket.getOutputStream());
                 //Create new ClientHandler instance and pass to it server, socket and data streams
                 ClientHandler handler = new ClientHandler(this, socket, in, out);
             } catch (Exception e) {
                 socket.close();
                 e.printStackTrace();
             }
-
         }
     }
     //Create timer to send email every 8h
-    private Timer timer = new Timer(28800000, new ActionListener() {
+    private Timer timer = new Timer(288000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) { sendMail(); }
     });
